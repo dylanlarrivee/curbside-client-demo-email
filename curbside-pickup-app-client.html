@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600&display=swap" rel="stylesheet" media="screen">
+    <link rel="stylesheet" type="text/css" href="css/normalize.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.js"></script>
+
+    <title>Curbside Pickup</title>
+    <style type="text/css">
+        body {
+            background-color: #0d1019;
+            font-family: 'Montserrat', sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        h1 {
+            font-family: inherit;
+            font-size: 1.8em;
+            font-weight: 600;
+            margin-top: .5em;
+            margin-bottom: 0;
+            text-align: left;
+        }
+        p {
+            margin:0;
+            padding:0;
+            text-align: left;
+        }
+        main {
+            background: linear-gradient(6deg, rgba(14,16,26,1) 0%, rgba(27,48,90,1) 51%, rgba(39,170,225,1) 100%);
+            color:#e7eae6;
+            font-family: inherit;
+            font-weight: normal;
+            letter-spacing: .1em;
+            margin:0 auto;
+            max-width: 37.500em;/*(600px)*/
+            padding:2em 0;
+        }
+        main>div {
+            
+            text-align: center;
+        }
+        section {
+            padding:0 2em;
+        }
+        form {
+            margin:1em 2em;
+            margin-top: 0;
+            padding-bottom:1em;
+            text-align: left;
+        }
+        input, label {
+            width:95%;
+        }
+        label {
+            display: flex;
+            font-weight: 700;
+            margin-top:2.5em;
+            margin-bottom:.4em;
+        }
+        label:first-child {
+            margin-top: 0;
+        }
+        input {
+            background: transparent;
+            border: none;
+            border-style: solid;
+            border-width: 3px;
+                -webkit-border-image: -webkit-linear-gradient(
+                    left,
+                    rgba(27,48,90,1) 1%,
+                    rgba(39,170,225,1) 50%,
+                    rgba(27,48,90,1) 100%
+                ) 0 0 100% 0/0 0 3px 0 stretch;
+            color:#fff;
+            padding:.25em;
+            margin-top:2em;
+        }
+        input::placeholder {
+            color:#fff;
+        }
+        footer {
+            margin:0 auto;
+            margin-top: auto;
+            max-width: 37.500em;/*(600px)*/
+            width:100%;
+        }
+        .footer-container {
+            align-items: center;
+            display: flex;
+            justify-content: space-around;
+            margin:1em auto;
+        }
+        .fa {
+          color: #a7a9ac;
+        }
+
+        .fa:hover {
+          color: #41beda;
+        }
+        .logo {
+            text-align: center;
+            width:100px;
+        }
+        .hero {
+            padding-top: 2em;
+            text-align: center;
+            width:100%;
+        }
+        .headline1 {
+            color:#41beda;
+            font-size:calc(100% + .5em);
+            font-weight: 600;
+            padding-top: .5em;
+        }
+        .submit-btn, .alert-btn {
+            background-color: #41beda;
+            border:0;
+            border-radius: 0.227em;
+            color:#010101;
+            cursor:pointer;
+            font-size: 1.5em;
+            font-weight: 700;
+            letter-spacing: .1em;
+            text-align: center;
+            transition: .5s ease all;
+        }
+        .submit-btn {
+            margin-top: 2em;
+            padding:.75em 2em;
+            width:100%;
+        }
+        .submit-btn:hover {
+            background-color: #19598a;
+        }
+        .alert-btn {
+            margin-top: .5em;
+            padding:.75em .25em;
+            width:78%;
+        }
+        .alert a {
+            color:#010101;
+            position:relative;
+            text-decoration: none;
+        }
+        .alert a:hover {
+            text-decoration: underline;
+        }
+        .alert {
+            background-color: #fff;
+            border:3px solid #41beda;
+            padding:.5em .5em;
+        }
+        .alert p {
+            color:#11131b;
+            text-align: center;
+        }
+        /*----generic----*/
+        .fntbold {
+            font-weight: 700;
+        }
+        .fnt-white {
+            color:#fff;
+        }
+        .hidden {
+            display:none;
+        }
+        .pt8 {
+            padding-top: .5em;
+        }
+        .pt16 {
+            padding-top: 1em;
+        }
+        .pt32 {
+            padding-top: 2em;
+        }
+        .txt-cntr {
+            text-align: center;
+        }
+        @media all and (max-width: 420px){
+            .mbl-hd {display: none;}
+        }
+    </style>
+</head>
+
+<body>
+<div id="forms_app">
+        <main>
+        <div>
+            <section>
+            <img src="img/logo.png" alt="Company Logo" class="logo" />
+            <h1 class="txt-cntr fnt-white">Curbside Pickup</h1>
+            </section>
+            <img src="img/hero.png" alt="Pick up your items curbside using this app" class="hero" />
+            <section>
+            <p class="txt-cntr headline1">Store Pick-up Hours: <br class="mbl-hd" />9-7 Seven days a&nbsp;week</p>
+
+            <p class="headline1 pt32">ORDER DETAILS:</p>
+            <p class="fnt-white pt16"><span class="fntbold">Name:</span>&nbsp;{{custData.name}}</p>
+            <p class="fnt-white pt8"><span class="fntbold">Order #:</span>&nbsp;{{custData.orderId}}</p>
+            <p class="fnt-white pt8"><span class="fntbold">Store #:</span>&nbsp;{{custData.storeId}}</p>
+            <p class="fnt-white pt8"><span class="fntbold">Status:</span>&nbsp;Ready for Pickup
+            </p>
+
+            <p v-if="custData.storeOpen" class="headline1 pt32">Please enter your vehicle description below to check&nbsp;in:</p>
+            </section>
+
+            
+            <form v-if="custData.storeOpen" method="POST" action="confirmation.html">
+                <label for="parkingSpotNum" class="hidden">Parking Spot Number</label>
+                <input type="text" id="parkingSpotNum" name="parkingSpotNum" value="" v-model="custData.parkingSpotNum" placeholder="Parking Spot Number">
+                <label for="carDescription" class="hidden">Car Description</label>
+                <input type="text" id="carDescription" name="carDescription" value="" v-model="custData.carDescription" placeholder="Vehicle Make and Color">
+                <input type="submit" v-on:click="sendCustData()" value="I AM HERE!" class="submit-btn">
+                <input type="hidden" name="storeId" value="$lookup(STORE_ID)$">
+            </form> 
+
+          
+           
+            <section v-if="!custData.storeOpen">
+                <br />
+                <div class="alert">
+                    <p>We are currently experiencing technical difficulties, please call the store directly and we will bring your order right out:</p>
+                    <a href="tel:800-555-1212"><button class="alert-btn">800-555-1212</button></a>
+                </div>
+            </section>
+        </div>
+        </main>
+</div>
+
+<footer>
+    <div class="footer-container">
+        <div class="item"><a href="curbside-app-home.html"><span class="fa fa-home fa-2x"></span></a></div>
+        <div class="item"><a href="tel:"><span class="fa fa-phone fa-2x"></span></a></div>
+        <div class="item"><a href="curbside-app-location.html"><span class="fa fa-map-marker fa-2x"></span></a></div>
+        <div class="item"><a href="curbside-app-rate.html"><span class="fa fa-trophy fa-2x"></span></a></div>
+    </div>
+</footer>
+    <script>
+        Vue.config.devtools = true;
+
+        var app = new Vue({
+            el: '#forms_app',
+            data: {
+                custData:{
+                    name:"$lookup(FIRST_NAME)$",
+                    orderId:"$lookup(ORDER_NUMBER)$",
+                    parkingSpotNum:"",
+                    carDescription:"",
+                    storeId:"$lookup(STORE_ID)$",
+                    companyId: "shawScott",
+                    storeOpen: true
+                }
+            },
+            mounted: function() {
+                var this_app = this;
+                var url = 'https://curbside-demo.shawscottapps.com/api/get-store-status';
+                let payload = {
+                    storeId: this.custData.storeId,
+                    companyId: this.custData.companyId
+                };
+
+                console.log("payload:", payload)
+
+                axios({
+                    url: url,
+                    method: "POST",
+                    data: payload,
+                })
+                .then((data) => {
+
+                this.custData.storeOpen = data.data.storeStatusPayload
+                })
+                .catch((error) => {
+                console.log("getStoreStatus: Internal server error:", error);
+                });
+
+
+
+                // $.ajax({
+                //     type: 'POST',
+                //     dataType: "json",
+                //     url: url,
+                //     cache: false,
+                //     data: this.custData.storeId,
+                //     success: function(data) {
+                //         this_app.custData.storeOpen = data.storeStatusPayload;
+                //     },
+                //     error: function(xhr) {
+                //         console.log(xhr);
+                //     }
+                // });
+
+            },
+            methods: {
+                sendCustData:function(){
+                    var this_app = this;
+                    var url = 'https://curbside-demo.shawscottapps.com/api/add-order';
+
+                    $.ajax({
+                        type: 'POST',
+                        dataType: "json",
+                        data: this.custData,
+                        url: url,
+                        cache: false,
+                        success: function(data) {
+                        },
+                        error: function(xhr) {
+                            console.log(xhr);
+                        }
+                    });
+                }
+            }
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
